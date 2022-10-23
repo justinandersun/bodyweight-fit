@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bodyweight Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bodyweight Fit provides custom, simple bodyweight workouts to increase your core strength with no equipment.">
+  <meta name="keywords" content="bodyweight workouts, bodyweight workout generator, bodyweight fitness, workouts with no equipment">
+  <meta name="author" content="Justin Andersun">
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="scripts/exercises.js"></script>
+  <script type="text/javascript" src="scripts/workout.js"></script>
+  <script type="text/javascript" src="scripts/main.js"></script>
+</head>
+<body>
+
+<div id="wrapper">
+  <header>
+    <p id="title">Bodyweight Fit</p>
+  </header>
+
+  <div id="main">
+    <div id="selectors">
+      I want a
+      <select id="listMinutes">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15" selected>15</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+      minute
+      <select id="listLevels">
+        <option value="beginner">beginner</option>
+        <option value="intermediate" selected>intermediate</option>
+        <option value="advanced">advanced</option>
+      </select>
+      workout for my
+      <select id="listTypes">
+        <option value="whole">whole body</option>
+        <option value="upper">upper body</option>
+        <option value="core" selected>core</option>
+        <option value="lower">lower body</option>
+      </select>
+      <div id="pullupBar">
+        and I
+        <select id="listBars">
+          <option value="1">can</option>
+          <option value="0">can't</option>
+        </select>
+        use a pullup bar
+      </div>
+      <button id="makeWorkout">Let's Go!</button>
+    </div>
+    <div id="program"></div>
+
+    <!-- <img class="explainer" src="img/burpee.gif" alt="How to do a burpee"> -->
+  </div>
+
+  <footer>
+    <p>
+      <a href="index.html">Workout</a> |
+      <a href="about.html">About</a> |
+      <a href="">FAQ</a> |
+      <a href="">Report a Bug</a>
+    </p>
+    <br>
+    <p>Made & maintained by <a href="https://andersun.com" target="_blank">Justin Andersun</a>.</p>
+  </footer>
+</div>
+
+</body>
+</html>

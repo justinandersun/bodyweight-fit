@@ -1,0 +1,129 @@
+/* Colors */
+:root {
+  --light: #b2d8d8;
+  --lime: #66b2b2;
+  --medium: #008080;
+  --meda: #006666;
+  --dark: #004c4c;
+}
+
+/* Fonts */
+@font-face {
+  font-family: "Koulen";
+  src: url("fonts/Koulen-Regular.ttf");
+}
+
+@font-face {
+  font-family: "WorkSans";
+  src: url("fonts/WorkSans.ttf");
+}
+
+@font-face {
+  font-family: "Geo";
+  src: url("fonts/Geo.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--medium);
+  color: var(--light);
+  font-family: WorkSans, sans-serif;
+  font-size: 1em;
+}
+
+#wrapper {
+  max-width: 50ch;
+  margin: auto;
+}
+
+header {
+  padding: 0.2em 0;
+  text-align: center;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  font-family: Koulen, serif;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--meda);
+}
+
+#main {
+  text-align: center;
+  min-height: 65vh;
+}
+
+#selectors {
+  font-size: 1.5em;
+  line-height: 2.2em;
+}
+
+select {
+  font-size: 1em;
+  padding: 0.2em;
+  font-family: WorkSans, serif;
+  color: var(--light);
+  background-color: var(--meda);
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  border: none;
+  border-bottom: 4px solid var(--lime);
+  padding: 0.5em 1em;
+  margin: 1.5em auto;
+  display: block;
+  background-color: var(--meda);
+  color: var(--light);
+  text-align: center;
+  font-family: WorkSans, serif;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: 300ms;
+}
+  button:hover {
+    background-color: var(--dark);
+    border-bottom: 4px solid var(--light);
+    color: var(--light);
+    transition: 300ms;
+  }
+
+#program {
+  font-size: 1.5em;
+  line-height: 2em;
+  padding: 0.5em 0 2em 0;
+}
+
+.explainer {
+  width: 80%;
+  margin: 0.5em auto;
+}
+
+.paragraph p {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  padding: 0.5em 0;
+}
+
+footer {
+  border-top: 1px solid var(--meda);
+  text-align: center;
+  padding: 2em 0;
+}
+
+footer p {
+  font-size: 1em;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: 800;
+  border-bottom: 2px dotted var(--light);
+  color: var(--light);
+}
