@@ -14,36 +14,6 @@ function pickSets(minutes) {
   }
 }
 
-// Pick the exercises based on the selected type and pullup bar usability
-function pickExercises(type) {
-  if (type=="lower") {
-    exerShuffle = legExercises.sort(() => 0.5 - Math.random());
-  } else if (type=="core") {
-    exerShuffle = coreExercises.sort(() => 0.5 - Math.random());
-  } else if (type=="upper") {
-    // Check if a pullup bar is usable
-    if (barsOut==1) {
-      upperExercises = pushExercises.concat(pullExercises);
-      exerShuffle = upperExercises.sort(() => 0.5 - Math.random());
-    } else {
-      exerShuffle = pushExercises.sort(() => 0.5 - Math.random());
-    }
-  } else {
-    // Shuffle each exercise deck
-    fullShuffle = fullExercises.sort(() => 0.5 - Math.random());
-    legShuffle = legExercises.sort(() => 0.5 - Math.random());
-    coreShuffle = coreExercises.sort(() => 0.5 - Math.random());
-    pushShuffle = pushExercises.sort(() => 0.5 - Math.random());
-    // Pick one from each to form a whole body routine
-    wholeExercises = [fullExercises[0], fullExercises[1], legShuffle[0], coreShuffle[0], pushShuffle[0]];
-    if (barsOut==1) {
-      pullShuffle = pullExercises.sort(() => 0.5 - Math.random());
-      wholeExercises.push(pullShuffle[0]);
-    }
-    exerShuffle = wholeExercises.sort(() => 0.5 - Math.random());
-  }
-}
-
 // Pick the number of exercises and rep ranges based on level
 function pickLevel(level) {
   if (level=="beginner") {
@@ -60,6 +30,88 @@ function pickLevel(level) {
     maxLoc = 6
   }
 }
+
+// Filter out exercises by difficulty level
+function filterExercises(exercise, level) {
+  let levelExercise = [];
+  if (level == "beginner") {
+    for (let i = 0; i < exercise.length; i++) {
+        if (exercise[i][7] == "beginner") {
+            levelExercise.push(exercise[i]);
+        }
+    }
+  } else if (level == "intermediate") {
+    for (let i = 0; i < exercise.length; i++) {
+        if (exercise[i][7] != "advanced") {
+            levelExercise.push(exercise[i]);
+        }
+    }
+  } else {
+    for (let i = 0; i < exercise.length; i++) {
+        levelExercise.push(exercise[i]);
+    }
+  }
+  return levelExercise;
+};
+
+// Pick filters
+function pickFilters(level) {
+  legFilter = filterExercises(legExercises, levelsOut);
+  coreFilter = filterExercises(coreExercises, levelsOut);
+  pushFilter = filterExercises(pushExercises, levelsOut);
+  pullFilter = filterExercises(pullExercises, levelsOut);
+  fullFilter = filterExercises(fullExercises, levelsOut);
+}
+
+// Pick the exercises based on the selected type and pullup bar usability
+function pickExercises(type) {
+  if (type=="lower") {
+    exerShuffle = legFilter.sort(() => 0.5 - Math.random());
+  } else if (type=="core") {
+    exerShuffle = coreFilter.sort(() => 0.5 - Math.random());
+  } else if (type=="upper") {
+    // Check if a pullup bar is usable
+    if (barsOut==1) {
+      upperExercises = pushFilter.concat(pullFilter);
+      exerShuffle = upperExercises.sort(() => 0.5 - Math.random());
+    } else {
+      exerShuffle = pushFilter.sort(() => 0.5 - Math.random());
+    }
+  } else {
+    // Shuffle each exercise deck
+    fullShuffle = fullFilter.sort(() => 0.5 - Math.random());
+    legShuffle = legFilter.sort(() => 0.5 - Math.random());
+    coreShuffle = coreFilter.sort(() => 0.5 - Math.random());
+    pushShuffle = pushFilter.sort(() => 0.5 - Math.random());
+    pullShuffle = pullFilter.sort(() => 0.5 - Math.random());
+    // Pick one from each to form a whole body routine
+    // Hacky check for qualifying full body exercises
+    if (fullShuffle.length < 2) {
+      wholeExercises = [legShuffle[0], legShuffle[1], coreShuffle[0], coreShuffle[1], pushShuffle[0]];
+    } else {
+      wholeExercises = [fullShuffle[0], fullShuffle[1], legShuffle[0], coreShuffle[0], pushShuffle[0]];
+    }
+    // Check for pullups
+    if (barsOut==1) {
+      wholeExercises.push(pullShuffle[0]);
+    }
+    exerShuffle = wholeExercises.sort(() => 0.5 - Math.random());
+  }
+}
+
+// Check true length
+function defineTrueLength(total, exercises) {
+  // hacky way to get length
+  let trueLength = 0;
+  exerLength = exerShuffle.length;
+  if (exerLength < total) {
+    trueLength = exerLength;
+  } else {
+    trueLength = total;
+  }
+  return trueLength;
+}
+
 
 // Pick the reps based on exercise and level
 function pickReps(total, exercises) {
@@ -92,10 +144,12 @@ function buildProgram(sets, total, exercises, reps) {
 
 function buildWorkout() {
   pickSets(minutesOut);
-  pickExercises(typesOut);
   pickLevel(levelsOut);
-  pickReps(numExercises, exerShuffle);
-  buildProgram(setsTotal, numExercises, exerShuffle, exerReps);
+  pickFilters(levelsOut);
+  pickExercises(typesOut);
+  trueLength = defineTrueLength(numExercises, exerShuffle);
+  pickReps(trueLength, exerShuffle);
+  buildProgram(setsTotal, trueLength, exerShuffle, exerReps);
   // Print the program
   document.getElementById("program").innerHTML = bodyProgram;
 }
