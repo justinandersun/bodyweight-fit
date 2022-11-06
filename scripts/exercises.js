@@ -23,7 +23,7 @@ var coreExercises = [
   ["Lying Leg Raises",8,12,10,15,12,20,"beginner","na","na"],
   ["Scissors",8,12,10,15,12,20,"beginner","na","na"],
   ["Bird Dogs",5,8,8,12,12,15,"beginner","na","na"],
-  ["Situps",8,12,10,15,12,18,"beginner","na","na"]
+  ["Situps",8,12,10,15,12,18,"intermediate","na","na"]
 ];
 
 var legExercises = [
