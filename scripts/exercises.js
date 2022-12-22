@@ -16,7 +16,7 @@ var pullExercises = [
 ];
 
 var coreExercises = [
-  ["Russian Twists",8,12,10,15,12,20,"beginner","na","na"],
+  ["Russian Twists",10,15,15,20,15,25,"beginner","na","na"],
   ["Bicycles",8,12,10,15,12,20,"beginner","na","na"],
   ["Crunches",10,15,12,20,15,25,"beginner","na","na"],
   ["Dead Bugs",5,8,8,12,12,15,"beginner","na","na"],
